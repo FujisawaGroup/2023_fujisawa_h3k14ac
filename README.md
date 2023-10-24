@@ -10,9 +10,9 @@ we examined the presence of the ERSE motif on the promoters of genes whose expre
 
 
 ## References 
-Zinc controls histone acetyltransferase KAT7 activity to maintain cellular zinc homeostasis
-Takao Fujisawa, Satoshi Takenaka, Lila Maekawa, Toshiyuki Kowada, Toshitaka Matsui, Shin Mizukami, Isao Naguro, Hidenori Ichijo
-bioRxiv 2023.10.18.562865
+Zinc controls histone acetyltransferase KAT7 activity to maintain cellular zinc homeostasis  
+Takao Fujisawa, Satoshi Takenaka, Lila Maekawa, Toshiyuki Kowada, Toshitaka Matsui, Shin Mizukami, Isao Naguro, Hidenori Ichijo  
+bioRxiv 2023.10.18.562865  
 doi: https://doi.org/10.1101/2023.10.18.562865
 
 ## Log
