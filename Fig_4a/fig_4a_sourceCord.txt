@@ -1,0 +1,36 @@
+library(ggplot2)
+library(rtracklayer)
+library(GenomicRanges)
+library(wigglescout)
+library(future)
+plan(multisession, workers = 4)
+
+#promoter
+#ENCFF002QJL.bw downloaded from ENCODE (https://www.encodeproject.org/files/ENCFF002QJL/)
+data_go0120127_prom <- bw_loci("ENCFF002QJL.bw",
+        loci = "go0120127_geneList.bed",
+)
+
+data_go0006829_prom <- bw_loci("ENCFF002QJL.bw",
+        loci = "go0006829_geneList.bed",
+)
+
+data_go0010043_prom <- bw_loci("ENCFF002QJL.bw",
+        loci = "go0010043_geneList.bed",
+)
+
+
+
+#enhancer
+#ENCFF002QJL.bw downloaded from ENCODE (https://www.encodeproject.org/files/ENCFF002QJL/)
+data_go0120127_enh <- bw_loci("ENCFF002QJL.bw",
+        loci = "enhancer_TSSassociation.bed",
+)
+
+data_go0006829_enh <- bw_loci("ENCFF002QJL.bw",
+        loci = "enhancer_TSSassociation.bed",
+)
+
+data_go0010043_enh <- bw_loci("ENCFF002QJL.bw",
+        loci = "enhancer_TSSassociation.bed",
+)
