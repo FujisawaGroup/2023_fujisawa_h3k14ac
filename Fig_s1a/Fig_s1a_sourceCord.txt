@@ -1,0 +1,2 @@
+#gene annotation with HOMER (http://homer.ucsd.edu/homer/)
+annotatePeaks.pl ERSE_hg38.bed hg38 > results.txt
