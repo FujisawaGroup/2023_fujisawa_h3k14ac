@@ -2,7 +2,7 @@
 This repository includes the code used in our zinc_h3k14ac study.
 
 ## Files 
-1. Fig_4  
+1. Fig_4a  
 We examined the H3K14ac signal on promoter or enhancer regions of genes involved in zinc homeostasis. This directory contains files used in the analysis.
 
 3. Fig_s1a   
