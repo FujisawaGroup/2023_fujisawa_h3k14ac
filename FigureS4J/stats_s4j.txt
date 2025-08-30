@@ -1,0 +1,2 @@
+	Ctrl_ZN	ZIP10#1_ZN	ZIP10#2_ZN
+Ctrl_ZD	<1e-04	<1e-04	<1e-04

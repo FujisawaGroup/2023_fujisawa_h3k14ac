@@ -1,0 +1,3 @@
+	Ctrl vs KAT7#1	Ctrl vs KAT7#2
+Enhancer1	0.0051	0.00287
+Enhancer2	0.00267	0.00564

@@ -1,0 +1,3 @@
+	ND vs ZD
+male	0.009326
+female	0.0002812

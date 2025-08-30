@@ -1,0 +1,3 @@
+	HFD vs ND	HFD vs HFD+zinc
+male	0.000348	0.002278
+female	0.00498	0.03015

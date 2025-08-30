@@ -1,0 +1,3 @@
+	ND vs HFD
+male	0.0002107
+female	0.02278
