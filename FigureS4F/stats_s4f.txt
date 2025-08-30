@@ -1,0 +1,4 @@
+	Lowzinc	Lowzinc+TSA	Lowzinc+zinc
+Lowzinc+TSA	1	-	-
+Lowzinc+zinc	1	1	-
+Normal	0.97	1	1

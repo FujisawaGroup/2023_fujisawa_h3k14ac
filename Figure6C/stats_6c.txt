@@ -1,0 +1,3 @@
+	HFD	HFD+zinc
+HFD+zinc	5.60E-09	-
+ND	1.80E-05	0.00076
