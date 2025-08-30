@@ -1,0 +1,32 @@
+#trim_galore version 0.6.10
+trim_galore -j 7 --fastqc --paired file1 file2
+
+#bowtie2 version 2.5.2
+bowtie2 -p 32 -x genome_file -1 file1 -2 file2 -S output_file
+
+#samtools version 1.13
+samtools view -@ 32 -b -o sam_file
+samtools sort -@ 32 bam_file > sorted.bam_file
+samtools index -@ 32 sorted.bam_file
+
+#spiker version 1.0.0
+split_bam.py --threads 32 -i sorted.bam_file -o output
+
+#deeptools version 3.5.1
+plotProfile -m  matrix_hela_enh.gz \
+--colors Black Black Black Black \
+--yMin 0 0 0 0 --yMax 16 16 16 16 \
+--samplesLabel ZN ZD siCtrl siKAT7 \
+-out plot_hela_enh.png
+
+plotProfile -m  matrix_hela_prom_20000.gz \
+--colors Black Black Black Black \
+--yMin 0 0 0 0 --yMax 16 16 16 16 \
+--samplesLabel ZN ZD siCtrl siKAT7 \
+-out plot_hela_prom_20000.png
+
+plotProfile -m  matrix_mouseliver_enh.gz \
+--colors Black Black \
+--yMin 0 0 --yMax 19 19 \
+--samplesLabel ND ZD \
+-out plot_mouseliver_enh.png

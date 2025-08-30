@@ -1,0 +1,87 @@
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+def split_and_run_4bins_single(df, title_prefix, rank_col, th, zn_thr):
+    y_col_raw = pick_microarray_col(df)
+    df = df.copy()
+    df["microarray_log2"] = np.where(df[y_col_raw] > 0, np.log2(df[y_col_raw]), np.nan)
+    y_col = "microarray_log2"
+
+    df_hi = df.loc[df[y_col] >= 0].copy()
+    df_lo = df.loc[df[y_col] < 0].copy()
+
+    plot_dir = "bin_plots_single"
+    stat_dir = "bin_stats_single"
+    os.makedirs(plot_dir, exist_ok=True)
+    os.makedirs(stat_dir, exist_ok=True)
+
+    # ratio >= 1
+    print(f"\n===== {title_prefix} (≤{th}, ZN>{zn_thr}) : log2(microarray_ratio) ≥ 0 → {NBINS} bins =====")
+    if len(df_hi) > 0:
+        summ_hi, pw_hi = analyze_and_plot_nbins(
+            df_hi, rank_col=rank_col, y_col=y_col, nbins=NBINS,
+            title_prefix=f"{title_prefix} (≤{th}, ZN>{zn_thr}, log2≥0)",
+            outfile_png=os.path.join(plot_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_ge1_bins{NBINS}.png"),
+            plot_kwargs={"ylim": (-0.1, 2.5), "ytick_interval": 0.5}
+        )
+        summ_hi.to_csv(os.path.join(stat_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_ge1_bins{NBINS}_summary.csv"), index=False)
+        pw_hi.to_csv(os.path.join(stat_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_ge1_bins{NBINS}_pairwise.csv"), index=False)
+        print(f"Saved: {plot_dir}/{title_prefix}_le_{th}_zn_gt{zn_thr}_ge1_bins{NBINS}.png")
+    else:
+        print("no data（log2 ≥ 0）")
+
+    # ratio < 1
+    print(f"\n===== {title_prefix} (≤{th}, ZN>{zn_thr}) : log2(microarray_ratio) < 0 → {NBINS} bins =====")
+    if len(df_lo) > 0:
+        summ_lo, pw_lo = analyze_and_plot_nbins(
+            df_lo, rank_col=rank_col, y_col=y_col, nbins=NBINS,
+            title_prefix=f"{title_prefix} (≤{th}, ZN>{zn_thr}, log2<0)",
+            outfile_png=os.path.join(plot_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_lt1_bins{NBINS}.png")
+        )
+        summ_lo.to_csv(os.path.join(stat_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_lt1_bins{NBINS}_summary.csv"), index=False)
+        pw_lo.to_csv(os.path.join(stat_dir, f"{title_prefix}_le_{th}_zn_gt{zn_thr}_lt1_bins{NBINS}_pairwise.csv"), index=False)
+        print(f"Saved: {plot_dir}/{title_prefix}_le_{th}_zn_gt{zn_thr}_lt1_bins{NBINS}.png")
+    else:
+        print("no data（log2 < 0）")
+
+
+th = 0.4
+zn_thr = 0
+
+if "outputs" in globals() and th in outputs:
+    d = outputs[th]
+
+    # prom3
+    if d.get("prom3", None) is not None:
+        try:
+            prom3_df = ensure_rank_prom3(d["prom3"])
+            prom3_df = filter_by_ZN_greater(prom3_df, col="ZN_H3K14ac.2", thr=zn_thr)
+            if len(prom3_df) > 0:
+                split_and_run_4bins_single(prom3_df, "prom3", "ZNminusZD_prom", th, zn_thr)
+        except Exception as e:
+            print(f"[prom3] skip: {e}")
+
+    # enh3
+    if d.get("enh3", None) is not None:
+        try:
+            enh3_df = ensure_rank_enh3(d["enh3"])
+            enh3_df = filter_by_ZN_greater(enh3_df, col="ZN_H3K14ac.2", thr=zn_thr)
+            if len(enh3_df) > 0:
+                split_and_run_4bins_single(enh3_df, "enh3", "ZNminusZD_enh", th, zn_thr)
+        except Exception as e:
+            print(f"[enh3] skip: {e}")
+
+    # prom_enh3
+    if d.get("prom_enh3", None) is not None:
+        try:
+            pe3_df = ensure_rank_prom_enh3(d["prom_enh3"], skipna_mean=True)
+            pe3_df = filter_by_ZN_greater(pe3_df, col="ZN_H3K14ac.2", thr=zn_thr)
+            if len(pe3_df) > 0:
+                split_and_run_4bins_single(pe3_df, "prom_enh3", "ZNminusZD_prom_enh", th, zn_thr)
+        except Exception as e:
+            print(f"[prom_enh3] skip: {e}")
+else:
+    print(f"no data")
