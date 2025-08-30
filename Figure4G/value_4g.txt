@@ -1,0 +1,28 @@
+group	value
+Normal	4.126795812
+Lowzinc	0.547965728
+Lowzinc+zinc	2.990456461
+Lowzinc+TSA	3.277988412
+Normal	5.132049729
+Lowzinc	0.782449214
+Lowzinc+zinc	2.811636511
+Lowzinc+TSA	2.932926944
+Normal	6.269675609
+Lowzinc	0.849873481
+Lowzinc+zinc	4.147832554
+Lowzinc+TSA	5.207624947
+
+
+group	value
+Normal	2.881266587
+Lowzinc	0.58905023
+Lowzinc+zinc	3.074978037
+Lowzinc+TSA	5.470776041
+Normal	2.977457497
+Lowzinc	0.944700425
+Lowzinc+zinc	3.296715054
+Lowzinc+TSA	2.797397663
+Normal	3.845403736
+Lowzinc	0.1469961
+Lowzinc+zinc	2.694186466
+Lowzinc+TSA	3.695435107
