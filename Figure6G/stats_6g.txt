@@ -1,0 +1,4 @@
+         DMSO  TPEN  TPEN_TSA
+TPEN     0.041 -     -       
+TPEN_TSA 1.000 0.042 -       
+Zn_TPEN  1.000 0.023 1.000   
